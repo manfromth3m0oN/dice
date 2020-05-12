@@ -37,17 +37,27 @@
 	function clear() {
 		col1roll = -1;
 		col2roll = -1;
-	}
+	};
+	function reroll(col) {
+		if (col == 1) {
+			col1roll = getRndInteger(rawData['col1'].length - 1)
+		}
+		if (col == 2) {
+			col2roll = getRndInteger(rawData['col2'].length - 1)
+		}
+	};
 </script>
 
 <main>
 	<button on:click={rollDie}>Roll the dice</button><br/>
 	{#if col1roll >= 0}
 		<p>Column 1:</p>{rawData['col1'][col1roll]}
+		<button on:click={() => reroll(1)}>Re-roll this</button>
 	{/if}
 
 	{#if col2roll >= 0}
 		<p>Column 2:</p>{rawData['col2'][col2roll]}
+		<button on:click={() => reroll(2)}>Re-roll this</button>
 	{/if} <br/>
 	<button on:click={clear}>Clear the results</button>
 </main>
